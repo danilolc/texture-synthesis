@@ -12,6 +12,7 @@
 *.cb2
 .*.lb
 
+*.log*
 ## Intermediate documents:
 *.dvi
 *.xdv
