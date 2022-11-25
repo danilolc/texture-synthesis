@@ -1,5 +1,224 @@
-\chapter{Desenvolvimento}
+\chapter{Deep Leaning}
 
-Corresponde ao corpo do trabalho, contendo a exposição ordenada e pormemorizada
-do assunto. Constam aqui a revisão de literatura, metodologia adotada, os resultados e
-sua discussão. Divide-se em seções e subseções. \cite{Robert2007}
+% Fazer um resumo
+
+Um dos principais problemas na área
+de classificação de imagens era o
+reconhecimento de dígitos
+escritos à mão. Essa dificuldade
+vinha pela grande variação de forma
+e posição dos números, tornando 
+os modelos muito complexos e pouco
+precisos. O desenvolvimento
+recente na área de Machine learning
+permitiu a criação de modelos
+simples capazes de aprender com
+os dados e fazer generalizações
+precisas, em alguns casos
+superando a percepção humana.
+
+Neste capítulo serão apresentadas
+técnicas que usam Redes Neurais,
+como elas foram desenvolvendo
+ao longo dos anos, e como podemos
+aplicá-las na Síntese de Textura.
+
+
+%\cite{Li2021}
+
+\section{Aprendizado de Representação}
+%19h
+
+Para um problema de classificação de imagens,
+é preciso saber quais são as informações
+úteis de extrair para obter uma melhor 
+representação de seu conteúdo. 
+Uma representação boa pode esconder informações
+redundantes ou realçar fatores que 
+melhor explicam a imagem.
+Bengio, Courville e Vincent
+\cite{Bengio2014} falam do importante
+papel que a aprendizagem
+de representações tem em Machine Learning.
+Um algoritmo que aprendesse tais representações
+eliminaria o trabalho de desenvolvê-las,
+o que tornaria mais rápido a criação de aplicações.
+
+
+% Emplilhar representações (layer)
+
+
+% Falar um pouco da história
+
+
+\section{Redes neurais}
+%20h
+
+% Definir o que é uma rede neural
+
+
+Redes Neurais são um tipo 
+de modelo de Machine Learning inspirado
+em redes de neurônios naturais e como
+eles se comunicam. Elas podem ser
+representadas por um grafo, onde
+cada nó representa um valor e cada aresta
+representa uma dependência. Essas
+redes podem ter vários formatos
+dependendo do tipo de aplicação.
+
+Um exemplo comum de Rede Neural é o Multi Layer
+Perceptron. Nesse modelo, a rede é dividida
+em camadas de diferentes tamanhos, e o dado
+flui da camada de entrada até a saída,
+que pode representar uma classificação
+da entrada ou uma função geral.
+
+% Imagem MLP
+%\begin{figure}[!ht]
+%	\includegraphics[width=\linewidth]{preview.png}
+%	\caption{Exemplo da visualização}
+%	\label{img:preview}
+%\end{figure}
+
+Cada camada da rede tem como parâmetros os offsets 
+$\mathbf{b}_m$ e uma matriz de pesos $\mathbf{W}_{m\times n}$.
+Assim, a transformação da entrada $\mathbf{x}_n$ na saída
+$\mathbf{y}_m$ pode ser representada com a seguinte operação:
+\begin{equation}
+	\mathbf{y} = 
+	\varphi\left( \mathbf{W}\mathbf{x} + \mathbf{b} \right),
+\end{equation}
+onde $\varphi$ é uma função não linear, comummente chamada
+de ``função de ativação''.
+
+%Os parâmetros são tais que minimizam o erro 
+%da saída. Essa minimização pode ser feita
+%calculando o gradiente 
+%\begin{equation}
+%	\mathbf{y'} = 
+%	\mathbf{W}\varphi'\left( \mathbf{W}\mathbf{x} + \mathbf{b} \right),
+%\end{equation}
+
+Os parâmetros são calculados minimizando
+uma função de erro na saída. Esse cálculo
+é feito calculando o gradiente dos parâmetros
+em relação à função de perda. Como a derivada
+de todas as funções aplicadas é conhecida,
+o gradiente pode ser calculado computacionalmente
+usando ``backpropagation''.
+
+%A ideia é ter um modelo
+%simples porém bem flexível
+%e capaz adaptar ao problema.
+
+% Aproximado universal para qualquer função
+% Capacidade de extrapolação
+
+% Dividir qualquer variedade
+
+Esse modelo é útil por envolver operações
+bem simples e rápidas de serem calculadas
+computacionalmente. Cada camada distorce
+o espaço de entrada para torná-lo linearmente
+separável no final. Pela sua flexibilidade,
+o modelo geralmente é chamado de aproximador 
+universal de qualquer função, pela
+sua capacidade de aprender funções complexas
+a partir de algumas amostras.
+
+
+% Falar do MNIST
+...
+
+\section{Redes convolucionais}
+%21h
+
+% Aproveitam a informação espacial
+% da imagem
+
+% Reduz a quantidade de parâmetros
+% Invariante por translação
+
+O Multi Layer Perceptron,
+quando aplicado diretamente
+nos pixels de uma imagem aparecem
+dois problemas consideráveis:
+a quantidade de parâmetros cresce muito,
+e informações espaciais da imagem
+são perdidas. Geralmente um objeto
+que queremos identificar pode aparecer
+em diferentes posições da imagem,
+ao transformá-la em um vetor
+perdemos essa invariância por translação.
+Com base nisso se tornou necessário
+desenvolver uma rede que faz representações
+independentes de translações e que tenham
+poucos parâmetros.
+
+% Sobre convolução
+
+A operação de convolução
+
+
+% Sobre CNN
+
+
+% Falar das principais arquiteturas (VGG19)
+
+% Revolução na classificação
+
+
+
+
+%\section{Features}
+
+% Mostrar o feature inversion
+% e o deep dream 
+
+
+
+\section{Síntese de textura com Redes Convolucionais}
+%22h
+
+% Falar das matrizes de Gram
+
+% Uma boa estatística perceptual
+
+% Falar do L-BFGS
+
+% Mostrar os resultados do Gatys
+
+%\section{} %MSLG+Gatys
+
+\chapter{Variações}
+
+O trabalho de síntese de textura
+não fica limitado apenas a re-amostrar
+a imagem de entrada. Ao longo
+dos 
+
+% Falar de aplicações diferendes de síntese de
+% textura
+
+\section{Analogias de Texturas}
+
+% Definir e mostrar resultados
+\cite{Hertzmann2001}
+
+\section{Transferência de estilo} 
+
+O método de ``Style Transfer'' proposto
+por Gatys, Ecker e Bethge \cite{Gatys2016}
+nos permite, alem de re-amotrar a textura,
+controlar a geometria do resultado.
+Para isso o algoritmo recebe duas imagens,
+uma definirá o estilo
+e outra definirá o conteúdo do resultado.
+
+...
+
+% Definir e mostrar resultados
+
+% Falar do deepart.io?
+

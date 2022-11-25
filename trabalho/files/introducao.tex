@@ -1,3 +1,206 @@
 \chapter{Introdução}
 
-Parte em que o autor fornece uma visão global da pesquisa realizada.
+% Falar da história
+
+...
+
+
+
+
+% Falar dos surveys
+
+O trabalho foi baseado em dois Surveys
+na área. O primeiro de Wei, Lefebvre, Kwatra
+e Turk \cite{Wei2009} dá ênfase em
+abordagens não paramétricas e texturas
+dinâmicas. Já o segundo de Raad, Davy, 
+Desolneux e Morel \cite{Raad2018} mostra
+a síntese com métodos mais recentes
+usando Deep Learning e Redes Convolucionais.
+Analisando os dois Surveys, fica bem claro o 
+quanto a área se modificou depois da
+revolução do Deep Learning, que se iniciou
+em 2015 com o trabalho de Yann LeCun, 
+Yoshua Bengio e Geoffrey Hinton \cite{LeCun2015}.
+
+\section{O que é textura}
+
+% Falar do problema de definir textura
+% - Na vida real
+% - Em computação gráfica - imagem (conjunto de pixels)
+
+% Definir textura como as características
+% da superfície de um objeto
+
+A palavra ``textura'' pode ter diferentes significados
+dependendo do contexto.
+Um deles se refere às
+diferentes características da superfície de um objeto,
+sejam elas visuais (cor, desenhos), geométricas (relevo,
+forma) ou táteis (maciez, dureza). 
+Em computação gráfica, textura geralmente é
+o nome que se dá a uma imagem (matriz de pixels)
+que descreve alguma
+característica da superfície de um objeto,
+como a cor ou a direção do vetor normal (utilizada
+para iluminação).
+
+% Restringir para texturas estacionárias
+% representadas por imagens
+
+Para o processo de síntese, é preciso restringir o
+conjunto de imagens consideradas texturas àquelas
+que apresentam algum tipo de padrão perceptual
+em seu domínio. Com isso é possível fazer a síntese
+estudando e imitando o processo que gerou esse padrão.
+
+% Falar da definição com Markov Chain
+
+Cross, G.R. e Jain, A.K. \cite{Cross1983} descrevem
+textura como sendo um Campo Markiviano Aleatório
+(Markov Random Field, MRF). Esse modelo é o mais
+usado no processo de síntese pois satisfaz a propriedade
+de Markov (o valor de cada pixel dado sua vizinhança não
+depende do resto da textura) e a homogeneidade (a
+distribuição e invariante por translação), logo
+se encaixa com as necessidades descritas anteriormente.
+
+
+
+% Mostrar imagens de texturas
+
+ 
+
+\section{O que é síntese de textura}
+
+% Processo de gerar uma textura "nova"
+% com mesma informação perceptual
+
+O processo de síntese de textura baseado
+em amostra não tem uma definição clara
+matematicamente, é algo mais intrínseco
+à percepção humana. O objetivo é,
+a partir de uma amostra de textura,
+gerar outras texturas de tamanho
+arbitrário que imitam o processo
+gerador da amostra. Esse processo
+gerador é baseado em métricas
+perceptuais, que não podem ser
+definidas de forma fechada, pois
+podem depender de aspectos
+finos da imagem, como forma e 
+iluminação.
+Assim, os trabalhos na área
+nos últimos anos consistem em
+tentar descobrir melhores aproximações
+para essa métrica perceptual.
+
+% Inserir imagens de exemplo
+
+% Pode ser interpretado como uma
+% reamostragem da distribuição das texturas
+
+Ao restringir o conjunto de imagens aos
+Campos Markovianos, o processo de síntese
+pode ser descrito como uma re-amostragem
+da distribuição condicional da amostra.
+Com isso, o desafio do método passa a ser 
+descobrir a distribuição a partir
+da amostra.
+
+
+\chapter{Modelos}
+
+\section{Modelos paramétricos}
+
+Os modelos que fazem a síntese a partir
+de um conjunto de estatísticas da amostra
+original são chamados modelos paramétricos.
+Esses modelos partem de um ruido e fazem
+a síntese reduzindo
+a diferença entre as estatísticas desse
+ruído e da amostra utilizando uma função de 
+otimização.
+A qualidade do modelo vai depender do
+conjunto de estatísticas escolhido
+e do tipo de otimização utilizado.
+
+...
+
+% Zhu et al [12] (MRF - Gibbs sampling)
+% Heeger and Bergen [6] (matching histograms)
+% De Bonet [1] (multi-resolution)
+% Simoncelli and Portilla [9, 11] (wavelets)?
+
+% Julesz’ hypothesis
+% two images are perceptually equivalent if and 
+% only if they agree on a set of statistic measurements.
+
+% Falar da dificuldade em definir uma 
+% estatística da informao perceptual
+
+
+\section{Modelos não paramétricos}
+
+% Falar dos modelos que extraem informação
+% diretamente da imagem
+
+Diferentemente dos modelos paramétricos,
+os modelos não paramétricos não dependem
+do cálculo de alguma
+estatística da amostra original para
+o processo de síntese. Ele gera a imagem
+pegando informação diretamente da
+amostra de modo a simular a amostragem
+da textura.
+
+Essa forma de amostragem foi proposta
+inicialmente por Efros e Leung \cite{Efros1999}.
+Ela consistia em re-amostrar a textura
+pixel por pixel, pegando diretamente
+da imagem original o pixel que tem
+a vizinhança mais parecida com a vizinhança
+de seu destino. Os resultados na época
+foram bem superiores aos que se podiam
+obter com os métodos paramétricos,
+mas a procura por todas as vizinhanças
+na amostra tornava o método lento.
+
+Mais tarde, Efros e Freeman \cite{Efros2001}
+propuseram o método de Quilting (costura),
+que fazia a amostragem a partir
+de pedaços da imagem original. 
+O método consistia em selecionar
+janelas de tamanho fixo da amostra
+e distribuí-las com uma sobreposição
+sobre elas. Em seguida é usado
+um algoritmo de min-cut para dividir
+essas janelas em pedaços que se encaixam
+para formar a nova textura.
+Essa abordagem era mais rápida 
+computacionalmente do que o método
+anterior, e produzia resultados
+tão bons quanto.
+
+Com os avanços na área,
+Vivek Kwatra \cite{Kwatra2005} propôs
+uma amostragem fazendo a minimização
+do que ele define como função de energia. 
+Essa função é a diferença quadrática
+entre as vizinhanças da textura gerada
+e as vizinhanças mais próximas de cada uma.
+O método usa uma variação do algoritmo EM, 
+onde na faze ``E'' a energia é diminuída
+por mínimos quadrados, e na faze ``M'' a
+energia é diminuída escolhendo as
+vizinhanças mais próximas na amostra.
+
+
+
+\section{Modelos de aprendizado profundo}
+
+% Portilla e Simonselli
+% Gatys
+
+% Falar de multiresolução? (De Bonet)
+
