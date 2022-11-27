@@ -28,14 +28,80 @@ imagens de $256 \times 256$ pixels.
 Foram escolhidos um conjunto de
 diferentes tipos de texturas 
 para explorar o comportamento
-do algoritmo:
-
+do algoritmo.
 
 % Mostrar os resultados
 
-% Falar do padding e do avgpool
+Em todos os testes a primeira imagem é
+a amostra, e as seguintes são passos (não
+necessariamente consecutivos) do
+algoritmo de otimização.
 
-% Textura em movimento
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=\linewidth]{files/assets/results/result2.png}
+	\includegraphics[width=\linewidth]{files/assets/results/result5.png}
+	\caption{Teste com texturas mais caóticas. No processo,
+	a escala dos objetos se mantém, portanto o resultado
+	terá quatro vezes mais informação.}
+	\label{img:preview}
+\end{figure}
+
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=\linewidth]{files/assets/results/result1.png}
+	\includegraphics[width=\linewidth]{files/assets/results/result3.png}
+	\caption{O método não funciona bem em textura com 
+	estrutura regular global, ele dá preferência por
+	estruturas locais. }
+	\label{img:preview}
+\end{figure}
+
+
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=\linewidth]{files/assets/results/result4.png}
+	\caption{Nuvens apresentam uma estrutura caótica
+	ideal para esse método.}
+	\label{img:preview}
+\end{figure}
+% Falar da animação
+
+Ao gerar algumas texturas, notou-se que durante
+o processo de otimização a imagem fica preza em 
+uma estrutura específica. Com isso foi pensado
+em adicionar ruído na imagem de vez em quando
+para forçar a mudança do ponto de convergência.
+Isso gerou um resultado interessante de movimentar
+a textura a cada aplicação do ruído.
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=\linewidth]{files/assets/results/result6.png}
+	\caption{A terceira imagem foi gerada a partir da adição de ruído
+		na segunda, assim como da terceira pra quarta e da quarta pra
+		quinta. 
+		Com isso, as quatro imagens geradas aparentam o processo
+	de movimento das nuvens.}
+	\label{img:preview}
+\end{figure}
+
+% Teste com imagens não textura
+
+Não é preciso se limitar a texturas com
+esse tipo de implementação. É possível verificar
+o que acontece no resultado com imagens não textura.
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=\linewidth]{files/assets/results/result7.png}
+	\includegraphics[width=\linewidth]{files/assets/results/result8.png}
+	\caption{A informação espacial da imagem foi perdida,
+	mas cores e formas prevalecem.}
+	\label{img:preview}
+\end{figure}
 
 % Style transfer
 

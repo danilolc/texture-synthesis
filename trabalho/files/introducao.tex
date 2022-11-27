@@ -67,7 +67,10 @@ se encaixa com as necessidades descritas anteriormente.
 
 \begin{figure}[!ht]
 	\includegraphics[width=\linewidth]{files/assets/texture.png}
-	\caption{Três exemplos de textura e uma imagem ...}
+	\caption{As três primeiras imagens são texturas por apresentarem
+	um padrão visual estacionário. A quarta imagem apresenta
+    uma estrutura não estacionária, não permitindo uma extrapolação
+	infinita.}
 	\label{img:preview}
 \end{figure}
 
@@ -104,8 +107,7 @@ para essa métrica perceptual.
 	\centering
 	\includegraphics[width=\linewidth*2/3]{files/assets/sinth.png}
 	\caption{Exemplo de síntese de textura. A imagem
-	maior tem a mesma informação visual da imagem
-	menor.}
+	maior é visualmente semelhante a imagem menor.}
 	\label{img:preview}
 \end{figure}
 
@@ -171,7 +173,8 @@ em cada uma dessas camadas.
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=\linewidth*2/3]{files/assets/articles/bergen.png}
-	\caption{...}
+	\caption{Síntese de Textura de Heegen e Bergen. O modelo
+	conseguia sintetizar elementos estocásticos da textura.}
 	\label{img:preview}
 \end{figure}
 
@@ -186,12 +189,10 @@ grosseiras até escalas mais finas.
 
 \begin{figure}[!ht]
 	\includegraphics[width=\linewidth]{files/assets/articles/bonet2.png}
-	\caption{...}
-	\label{img:preview}
-\end{figure}
-\begin{figure}[!ht]
 	\includegraphics[width=\linewidth]{files/assets/articles/bonet.png}
-	\caption{...}
+	\caption{Modelo de De Bonet. O trabalho era feito escala
+	por escala. Isso permitia sintetizar elementos mais regulares
+    da textura.}
 	\label{img:preview}
 \end{figure}
 
@@ -207,7 +208,7 @@ usando a técnica de Gibbs Sampling.
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=\linewidth*2/3]{files/assets/articles/zhu.png}
-	\caption{...}
+	\caption{Modelo de Zhu, Wu e Mumford usando 5 filtros.}
 	\label{img:preview}
 \end{figure}
 
@@ -222,7 +223,9 @@ de Wavelet da amostra.
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=\linewidth*2/3]{files/assets/articles/portilla.png}
-	\caption{...}
+	\caption{Teste do modelo de Portilla e Simoncelli com uma
+	textura mais estruturado. É possível notar que há uma
+	dificuldade em representar tais estruturas.}
 	\label{img:preview}
 \end{figure}
 
@@ -284,13 +287,9 @@ na amostra tornava o método lento.
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=\linewidth*2/3]{files/assets/articles/efros3.png}
-	\caption{...}
-	\label{img:preview}
-\end{figure}
-\begin{figure}[!ht]
-	\centering
-	\includegraphics[width=\linewidth*2/3]{files/assets/articles/efros1.png}
-	\caption{...}
+	\includegraphics[width=\linewidth*5/6]{files/assets/articles/efros1.png}
+	\caption{O algorítmo de Efros e Leung vai escolher o pixel
+	com vizinhança mais parecida na amostra.}
 	\label{img:preview}
 \end{figure}
 
@@ -312,7 +311,8 @@ tão bons quanto.
 
 \begin{figure}[!ht]
 	\includegraphics[width=\linewidth]{files/assets/articles/efros2.png}
-	\caption{...}
+	\caption{O modelo Quilting de Efros e Freeman escolhe pedaços
+	aleatórios da amostra e encaixa os quadrados.}
 	\label{img:preview}
 \end{figure}
 
@@ -332,7 +332,8 @@ vizinhanças mais próximas na amostra.
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=\linewidth*2/3]{files/assets/articles/kwatra.png}
-	\caption{...}
+	\caption{Modelo de Vivek Kwatra. A função de energia 
+	cai a cada nível de resolução.}
 	\label{img:preview}
 \end{figure}
 
@@ -368,7 +369,10 @@ nesse trabalho, seguindo de uma implementação.
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=\linewidth*2/3]{files/assets/articles/gatys1.png}
-	\caption{...}
+	\caption{Modelo de Gatys, Ecker e Bethge que
+	utiliza as matrizes de Gram das convoluções.
+	O método permite não fica muito preso na amostra
+	e produz resultados mais criativos.}
 	\label{img:preview}
 \end{figure}
 
@@ -385,7 +389,8 @@ escolhidos.
 
 \begin{figure}[!ht]
 	\includegraphics[width=\linewidth]{files/assets/articles/lu.png}
-	\caption{...}
+	\caption{Modelo de Lu, Zhu e Wu que pega quatro imagens como
+	entrada (as de cima) e gera quatro imagens de saída (as de baixo).}
 	\label{img:preview}
 \end{figure}
 
