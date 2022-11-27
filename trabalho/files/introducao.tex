@@ -1,7 +1,7 @@
 \chapter{Introdução}
 
 % Falar da história
-
+% processamento de imagens
 ...
 
 
@@ -62,7 +62,7 @@ textura como sendo um Campo Markiviano Aleatório
 usado no processo de síntese pois satisfaz a propriedade
 de Markov (o valor de cada pixel dado sua vizinhança não
 depende do resto da textura) e a homogeneidade (a
-distribuição e invariante por translação), logo
+distribuição é invariante por translação), logo
 se encaixa com as necessidades descritas anteriormente.
 
 
@@ -97,6 +97,7 @@ para essa métrica perceptual.
 
 % Inserir imagens de exemplo
 
+
 % Pode ser interpretado como uma
 % reamostragem da distribuição das texturas
 
@@ -111,12 +112,25 @@ da amostra.
 
 \chapter{Modelos}
 
+Com o crescimento da área de processamento
+de imagens e do poder computacional,
+os modelos de Síntese de Textura foram
+se aprimorando ao longo do tempo.
+As melhorias podem ser de qualidade
+do resultado ou no tempo de 
+execução do método. Neste capítulo
+será apresentado um breve resumo de
+alguns dos principais modelos
+da área.
+
+
+
 \section{Modelos paramétricos}
 
 Os modelos que fazem a síntese a partir
 de um conjunto de estatísticas da amostra
 original são chamados modelos paramétricos.
-Esses modelos partem de um ruido e fazem
+Esses modelos partem de um ruído e fazem
 a síntese reduzindo
 a diferença entre as estatísticas desse
 ruído e da amostra utilizando uma função de 
@@ -125,12 +139,47 @@ A qualidade do modelo vai depender do
 conjunto de estatísticas escolhido
 e do tipo de otimização utilizado.
 
-...
+% Heeger and Bergen [6] (matching histograms)
+
+Heegen e Bergen \cite{Heeger1995} foram
+um dos pioneiros no ramo. O método
+parte de um ruído branco e faz a síntese
+aproximando os histogramas das funções
+de distribuição acumulada.
+O método usa transformações
+por pirâmides, que decompõe a imagem
+em representações em diferentes escalas,
+e faz a aproximação do histograma
+em cada uma dessas camadas.
+%Eles apresentam
+%dois tipos de pirâmides, a Pirâmide 
+%Laplaciana, que 
+%e a Pirâmide Transladável (Steerable Pyramid)
+
+% De Bonet [1] (multi-resolution)
+
+De Bonet \cite{Bonet1997} propôs
+um método que calcula a distribuição
+conjunta da amostra em diferentes
+escalas. Em seguida a amostragem
+é feita partindo de escalas mais
+grosseiras até escalas mais finas.
 
 % Zhu et al [12] (MRF - Gibbs sampling)
-% Heeger and Bergen [6] (matching histograms)
-% De Bonet [1] (multi-resolution)
-% Simoncelli and Portilla [9, 11] (wavelets)?
+Zhu, Wu e Mumford \cite{Zhu1998}
+utiliza um banco de filtros para
+obter uma representação da imagem
+e extrair o histograma.
+Em seguida deriva-se a distribuição
+desses filtros para serem re-amostrados
+usando a técnica de Gibbs Sampling.
+
+% Simoncelli and Portilla [9, 11] (wavelets)
+
+Portilla e Simoncelli \cite{Portilla1999}
+propuseram fazer a amostragem usando
+as autocorrelações da Transformada
+de Wavelet da amostra.
 
 % Julesz’ hypothesis
 % two images are perceptually equivalent if and 
@@ -138,6 +187,26 @@ e do tipo de otimização utilizado.
 
 % Falar da dificuldade em definir uma 
 % estatística da informao perceptual
+
+Béla Julesz foi um neurocientista que
+trabalhava na percepção visual humana.
+Em uma de suas publicações \cite{Julesz1981},
+Julesz fez experimentos que mostravam
+que um conjunto de imagens com mesma
+informação visual podem ser representadas
+pela densidade do que ele chama de
+``Textons'', que são estruturas
+como cor e arestas presentes na imagem.
+Esse tipo de representação, embora tenha
+guiado o trabalho de modelos paramétricos,
+não deixa claro como fazer essa representação
+em Textons. Assim, na tentativa de encontrar
+tal representação, os métodos acabam sendo
+difíceis de implementar, e nem sempre
+conseguem ter sucesso em diferentes texturas.
+
+
+
 
 
 \section{Modelos não paramétricos}
@@ -199,8 +268,43 @@ vizinhanças mais próximas na amostra.
 
 \section{Modelos de aprendizado profundo}
 
-% Portilla e Simonselli
+Os modelos de aprendizado profundo se aproveitam
+dos avanços recentes que a área de Aprendizagem
+de Máquina para melhorar o processo de síntese.
+Os métodos a seguir utilizam as representações
+geradas por redes treinadas para a detecção
+de objetos para melhorar métodos paramétricos
+de síntese já existentes.
+As representações geradas por essas
+redes conseguem sintetizar bem a informação
+visual da imagem, oferecendo uma boa
+métrica perceptual.
+
 % Gatys
+
+O primeiro a propor Síntese
+de Textura baseado nesses modelos foram
+Gatys, Ecker e Bethge \cite{Gatys2015}.
+O trabalho utiliza as autocorrelações
+da textura semelhante ao que foi proposto
+por Portilla e Simoncelli, porém, em
+vez de utilizar transformações da amostra
+escolhidas a mão, utilizam a saída da
+rede convolucional pré treinada. 
+Esse método será tratado com detalhes
+nesse trabalho, seguindo de uma implementação.
+
+% Lu
+
+Lu, Zhu e Wu \cite{Lu2016}
+utilizam as representações
+das redes convolucionais
+no lugar do banco de filtros
+no método de Zhu, Wu e Mumford,
+produzindo melhores resultados sem
+se preocupar com o tipo de filtros
+escolhidos.
+
 
 % Falar de multiresolução? (De Bonet)
 

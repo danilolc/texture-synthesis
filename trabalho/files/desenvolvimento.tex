@@ -2,15 +2,16 @@
 
 % Fazer um resumo
 
-Um dos principais problemas na área
+Um dos clássicos problemas na área
 de classificação de imagens era o
 reconhecimento de dígitos
-escritos à mão. Essa dificuldade
+escritos à mão. 
+A dificuldade nesse tipo de problema
 vinha pela grande variação de forma
 e posição dos números, tornando 
 os modelos muito complexos e pouco
 precisos. O desenvolvimento
-recente na área de Machine learning
+recente na área de Machine Learning
 permitiu a criação de modelos
 simples capazes de aprender com
 os dados e fazer generalizações
@@ -29,12 +30,26 @@ aplicá-las na Síntese de Textura.
 \section{Aprendizado de Representação}
 %19h
 
+
+% Hierarquia de representações
+No processo de análise de imagens,
+precisamos criar representações
+que melhor explicam seu conteúdo.
+Essas representações podem ser organizadas
+hierarquicamente, onde
+a primeira identifica
+arestas, a segunda indica cantos, etc.
+Ao descer no nível das representações
+queremos ter uma melhor informação
+semântica da imagem.
+
+
 Para um problema de classificação de imagens,
-é preciso saber quais são as informações
-úteis de extrair para obter uma melhor 
+é preciso saber quais informações são 
+úteis para obter uma melhor 
 representação de seu conteúdo. 
-Uma representação boa pode esconder informações
-redundantes ou realçar fatores que 
+Uma representação boa esconde informações
+redundantes e realçar fatores que 
 melhor explicam a imagem.
 Bengio, Courville e Vincent
 \cite{Bengio2014} falam do importante
@@ -43,12 +58,6 @@ de representações tem em Machine Learning.
 Um algoritmo que aprendesse tais representações
 eliminaria o trabalho de desenvolvê-las,
 o que tornaria mais rápido a criação de aplicações.
-
-
-% Emplilhar representações (layer)
-
-
-% Falar um pouco da história
 
 
 \section{Redes neurais}
@@ -90,7 +99,9 @@ $\mathbf{y}_m$ pode ser representada com a seguinte operação:
 	\varphi\left( \mathbf{W}\mathbf{x} + \mathbf{b} \right),
 \end{equation}
 onde $\varphi$ é uma função não linear, comummente chamada
-de ``função de ativação''.
+de ``função de ativação''. A função não linear
+mais comummente usada é a ReLU, que trunca valores
+negativos no $0$.
 
 %Os parâmetros são tais que minimizam o erro 
 %da saída. Essa minimização pode ser feita
@@ -101,12 +112,12 @@ de ``função de ativação''.
 %\end{equation}
 
 Os parâmetros são calculados minimizando
-uma função de erro na saída. Esse cálculo
-é feito calculando o gradiente dos parâmetros
+uma função de erro na saída. Essa minimização
+é feita usando o gradiente dos parâmetros
 em relação à função de perda. Como a derivada
 de todas as funções aplicadas é conhecida,
 o gradiente pode ser calculado computacionalmente
-usando ``backpropagation''.
+utilizando ``backpropagation''.
 
 %A ideia é ter um modelo
 %simples porém bem flexível
@@ -123,9 +134,9 @@ computacionalmente. Cada camada distorce
 o espaço de entrada para torná-lo linearmente
 separável no final. Pela sua flexibilidade,
 o modelo geralmente é chamado de aproximador 
-universal de qualquer função, pela
-sua capacidade de aprender funções complexas
-a partir de algumas amostras.
+universal de qualquer função, pois
+é capacidade de aprender funções complexas
+a partir de amostras.
 
 
 % Falar do MNIST
@@ -149,19 +160,22 @@ e informações espaciais da imagem
 são perdidas. Geralmente um objeto
 que queremos identificar pode aparecer
 em diferentes posições da imagem,
-ao transformá-la em um vetor
+e ao transformá-la em um vetor,
 perdemos essa invariância por translação.
 Com base nisso se tornou necessário
-desenvolver uma rede que faz representações
-independentes de translações e que tenham
-poucos parâmetros.
+desenvolver uma rede que aproveite
+a informação espacial da imagem
+e que tenha poucos parâmetros.
 
 % Sobre convolução
 
 A operação de convolução
 
+...
 
-% Sobre CNN
+
+
+% Sobre CNN (pooling, ReLU)
 
 
 % Falar das principais arquiteturas (VGG19)
@@ -181,11 +195,16 @@ A operação de convolução
 \section{Síntese de textura com Redes Convolucionais}
 %22h
 
+...
 % Falar das matrizes de Gram
 
 % Uma boa estatística perceptual
 
-% Falar do L-BFGS
+% Falar do L-BFGS 
+% (avalia o resultado da função várias vezes
+% antes de fazer o passo, é mais eficiente
+% em problemas com grande quantidade de parâmetros)
+
 
 % Mostrar os resultados do Gatys
 
@@ -196,8 +215,13 @@ A operação de convolução
 O trabalho de síntese de textura
 não fica limitado apenas a re-amostrar
 a imagem de entrada. Ao longo
-dos 
+dos anos foram aparecendo trabalhos
+que aproveitavam os algoritmos
+desenvolvidos até então para
+criar aplicações como ``inpainting''
+e ``renderizações não foto-realísticas''.
 
+...
 % Falar de aplicações diferendes de síntese de
 % textura
 
@@ -206,11 +230,13 @@ dos
 % Definir e mostrar resultados
 \cite{Hertzmann2001}
 
+...
+
 \section{Transferência de estilo} 
 
 O método de ``Style Transfer'' proposto
 por Gatys, Ecker e Bethge \cite{Gatys2016}
-nos permite, alem de re-amotrar a textura,
+nos permite, alem de re-amostrar a textura,
 controlar a geometria do resultado.
 Para isso o algoritmo recebe duas imagens,
 uma definirá o estilo
