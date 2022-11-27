@@ -65,7 +65,11 @@ depende do resto da textura) e a homogeneidade (a
 distribuição é invariante por translação), logo
 se encaixa com as necessidades descritas anteriormente.
 
-
+\begin{figure}[!ht]
+	\includegraphics[width=\linewidth]{files/assets/texture.png}
+	\caption{Três exemplos de textura e uma imagem ...}
+	\label{img:preview}
+\end{figure}
 
 % Mostrar imagens de texturas
 
@@ -96,6 +100,14 @@ tentar descobrir melhores aproximações
 para essa métrica perceptual.
 
 % Inserir imagens de exemplo
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=\linewidth*2/3]{files/assets/sinth.png}
+	\caption{Exemplo de síntese de textura. A imagem
+	maior tem a mesma informação visual da imagem
+	menor.}
+	\label{img:preview}
+\end{figure}
 
 
 % Pode ser interpretado como uma
@@ -156,6 +168,13 @@ em cada uma dessas camadas.
 %Laplaciana, que 
 %e a Pirâmide Transladável (Steerable Pyramid)
 
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=\linewidth*2/3]{files/assets/articles/bergen.png}
+	\caption{...}
+	\label{img:preview}
+\end{figure}
+
 % De Bonet [1] (multi-resolution)
 
 De Bonet \cite{Bonet1997} propôs
@@ -164,6 +183,17 @@ conjunta da amostra em diferentes
 escalas. Em seguida a amostragem
 é feita partindo de escalas mais
 grosseiras até escalas mais finas.
+
+\begin{figure}[!ht]
+	\includegraphics[width=\linewidth]{files/assets/articles/bonet2.png}
+	\caption{...}
+	\label{img:preview}
+\end{figure}
+\begin{figure}[!ht]
+	\includegraphics[width=\linewidth]{files/assets/articles/bonet.png}
+	\caption{...}
+	\label{img:preview}
+\end{figure}
 
 % Zhu et al [12] (MRF - Gibbs sampling)
 Zhu, Wu e Mumford \cite{Zhu1998}
@@ -174,12 +204,28 @@ Em seguida deriva-se a distribuição
 desses filtros para serem re-amostrados
 usando a técnica de Gibbs Sampling.
 
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=\linewidth*2/3]{files/assets/articles/zhu.png}
+	\caption{...}
+	\label{img:preview}
+\end{figure}
+
+
 % Simoncelli and Portilla [9, 11] (wavelets)
 
 Portilla e Simoncelli \cite{Portilla1999}
 propuseram fazer a amostragem usando
 as autocorrelações da Transformada
 de Wavelet da amostra.
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=\linewidth*2/3]{files/assets/articles/portilla.png}
+	\caption{...}
+	\label{img:preview}
+\end{figure}
+
 
 % Julesz’ hypothesis
 % two images are perceptually equivalent if and 
@@ -235,6 +281,19 @@ obter com os métodos paramétricos,
 mas a procura por todas as vizinhanças
 na amostra tornava o método lento.
 
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=\linewidth*2/3]{files/assets/articles/efros3.png}
+	\caption{...}
+	\label{img:preview}
+\end{figure}
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=\linewidth*2/3]{files/assets/articles/efros1.png}
+	\caption{...}
+	\label{img:preview}
+\end{figure}
+
 Mais tarde, Efros e Freeman \cite{Efros2001}
 propuseram o método de Quilting (costura),
 que fazia a amostragem a partir
@@ -251,6 +310,12 @@ computacionalmente do que o método
 anterior, e produzia resultados
 tão bons quanto.
 
+\begin{figure}[!ht]
+	\includegraphics[width=\linewidth]{files/assets/articles/efros2.png}
+	\caption{...}
+	\label{img:preview}
+\end{figure}
+
 Com os avanços na área,
 Vivek Kwatra \cite{Kwatra2005} propôs
 uma amostragem fazendo a minimização
@@ -264,6 +329,12 @@ por mínimos quadrados, e na faze ``M'' a
 energia é diminuída escolhendo as
 vizinhanças mais próximas na amostra.
 
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=\linewidth*2/3]{files/assets/articles/kwatra.png}
+	\caption{...}
+	\label{img:preview}
+\end{figure}
 
 
 \section{Modelos de aprendizado profundo}
@@ -294,6 +365,13 @@ rede convolucional pré treinada.
 Esse método será tratado com detalhes
 nesse trabalho, seguindo de uma implementação.
 
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=\linewidth*2/3]{files/assets/articles/gatys1.png}
+	\caption{...}
+	\label{img:preview}
+\end{figure}
+
 % Lu
 
 Lu, Zhu e Wu \cite{Lu2016}
@@ -304,6 +382,12 @@ no método de Zhu, Wu e Mumford,
 produzindo melhores resultados sem
 se preocupar com o tipo de filtros
 escolhidos.
+
+\begin{figure}[!ht]
+	\includegraphics[width=\linewidth]{files/assets/articles/lu.png}
+	\caption{...}
+	\label{img:preview}
+\end{figure}
 
 
 % Falar de multiresolução? (De Bonet)

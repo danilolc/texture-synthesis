@@ -84,11 +84,14 @@ que pode representar uma classificação
 da entrada ou uma função geral.
 
 % Imagem MLP
-%\begin{figure}[!ht]
-%	\includegraphics[width=\linewidth]{preview.png}
-%	\caption{Exemplo da visualização}
-%	\label{img:preview}
-%\end{figure}
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=\linewidth*2/3]{files/assets/deeplearning/mlp.png}
+	\caption{...}
+	\label{img:preview}
+\end{figure}
+
 
 Cada camada da rede tem como parâmetros os offsets 
 $\mathbf{b}_m$ e uma matriz de pesos $\mathbf{W}_{m\times n}$.
@@ -102,6 +105,13 @@ onde $\varphi$ é uma função não linear, comummente chamada
 de ``função de ativação''. A função não linear
 mais comummente usada é a ReLU, que trunca valores
 negativos no $0$.
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=\linewidth*2/3]{files/assets/deeplearning/relu.png}
+	\caption{...}
+	\label{img:preview}
+\end{figure}
 
 %Os parâmetros são tais que minimizam o erro 
 %da saída. Essa minimização pode ser feita
@@ -210,6 +220,7 @@ A operação de convolução
 
 %\section{} %MSLG+Gatys
 
+\iffalse
 \chapter{Variações}
 
 O trabalho de síntese de textura
@@ -232,6 +243,21 @@ e ``renderizações não foto-realísticas''.
 
 ...
 
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=\linewidth*2/3]{files/assets/articles/heartzmann1.png}
+	\caption{...}
+	\label{img:preview}
+\end{figure}
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=\linewidth*2/3]{files/assets/articles/heartzmann2.png}
+	\caption{...}
+	\label{img:preview}
+\end{figure}
+
+
 \section{Transferência de estilo} 
 
 O método de ``Style Transfer'' proposto
@@ -244,7 +270,16 @@ e outra definirá o conteúdo do resultado.
 
 ...
 
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=\linewidth]{files/assets/articles/gatys3.png}
+	\caption{...}
+	\label{img:preview}
+\end{figure}
+
+
 % Definir e mostrar resultados
 
 % Falar do deepart.io?
 
+\fi
