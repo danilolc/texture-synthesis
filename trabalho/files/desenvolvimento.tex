@@ -49,7 +49,7 @@ Para um problema de classificação de imagens,
 úteis para obter uma melhor 
 representação de seu conteúdo. 
 Uma representação boa esconde informações
-redundantes e realçar fatores que 
+redundantes e realça fatores que 
 melhor explicam a imagem.
 Bengio, Courville e Vincent
 \cite{Bengio2014} falam do importante
@@ -153,7 +153,7 @@ a partir de amostras.
 
 
 % Falar do MNIST
-...
+%...
 
 \section{Redes convolucionais}
 %21h
@@ -164,7 +164,7 @@ a partir de amostras.
 % Reduz a quantidade de parâmetros
 % Invariante por translação
 
-O Multi Layer Perceptron,
+O Multi Layer Perceptron (MLP),
 quando aplicado diretamente
 nos pixels de uma imagem aparecem
 dois problemas consideráveis:
@@ -181,22 +181,85 @@ a informação espacial da imagem
 e que tenha poucos parâmetros.
 
 % Sobre convolução
-
 %A operação de convolução
 
-...
+A convolução é um filtro linear 
+muito utilizado em processamento
+de imagens. Para transformar
+a imagem ele recebe uma matriz
+chamada kernel, e faz a convolução
+somando a vizinhança de cada ponto
+com os pesos definidos pelo kernel.
+Dependendo da matriz escolhida,
+vários filtros podem ser gerados,
+como detector de arestas, suavizador,
+etc.
 
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[height=200pt]{files/assets/deeplearning/conv.png}
+	\caption{Exemplo de como a convolução opera em uma imagem.
+	Em azul a origem e em verde o destino. O kernel nesse caso
+	é uma matriz $3\times 3$. A imagem precisa ser extrapolada
+	para as vizinhanças das bordas, geralmente é preenchida
+	com 0.}
+	\label{img:preview}
+\end{figure}
 
 
 % Sobre CNN (pooling, ReLU)
 
+Uma rede neural convolucional é formada
+por um conjunto de convoluções que
+geram representações da entrada, 
+tendo o kernel como parâmetro a ser aprendido.
+A rede empilha essas convoluções seguidas
+de aplicações de funções ReLU para tirar
+a linearidade, e camadas de Pooling,
+que diminuem o tamanho da imagem
+juntando pixels vizinhos através de
+operações como a média ou o máximo.
 
-% Falar das principais arquiteturas (VGG19)
+
+Uma imagem na entrada da rede tem 
+dimensão $W\times H \times 3$,
+onde a última representa os três
+canais de cores.
+As convoluções operam nos canais
+de cores e podem gerar novos canais,
+geralmente chamados de ``features'',
+cada uma representando alguma informação
+da imagem.
+% !!! Falar do aumento de features
 
 % Revolução na classificação
 
+Esse tipo de rede gerou uma revolução
+no ramo de classificação de imagens.
+A classificação era feita passando
+por algumas camadas de Pooling e
+ligando a saída em uma rede Multi
+Layer Perceptron.
 
+Uma exemplo de arquitetura que obteve
+sucesso em classificação de imagens
+foi a rede VGG-19. Essa rede 
+tem camadas de convolução e ReLU,
+e a cada pooling dobra o número
+de features, indicando que quanto
+mais abaixo a informação está na rede,
+mais representações ela pode ter.
 
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=\linewidth*5/6]{files/assets/deeplearning/vgg19.png}
+	\caption{Arquitetura da rede VGG-19. Cada bloco cinza representa
+	uma convolução e um ReLU, os blocos vermelhos representam 
+	Pooling, os blocos azuis são camadas da rede MLP e em verde é a
+	saída da classificação (ela é treinada para diferencias $1000$
+	classes).}
+	\label{img:preview}
+\end{figure}
 
 %\section{Features}
 
@@ -208,10 +271,59 @@ e que tenha poucos parâmetros.
 \section{Síntese de textura com Redes Convolucionais}
 %22h
 
-...
-% Falar das matrizes de Gram
+As redes convolucionais
+treinadas para classificação de imagem (em particular
+a rede VGG-19) fazem uma série de operações em
+pirâmide para extrair informação úteis da imagem que
+se quer classificar. A riqueza semântica de cada
+uma dessas informações vai depender do nível da camada,
+com as primeiras camadas salientando detalhes
+mais primitivos, como arestas e cantos, e as últimas
+camadas salientando objetos complexos como rostos
+e animais.
 
-% Uma boa estatística perceptual
+% Deep dream?
+
+Para a criação do método de síntese de textura
+utilizando essas redes, a equipe de Gatys percebeu que 
+mantendo as relações entre as camadas,
+a textura pode ser randomizada sem que 
+a informação perceptual da imagem se perca.
+Para isso eles utilizaram a matriz de Gram gerada por cada
+uma dessas camadas. A matriz tem tamanho $N_l \times N_l$,
+onde $N_l$ é o número de features da camada $l$ da rede.
+A saída de cada camada convolucional tem dimensão
+$W_l\times H_l \times N_l$; para calcular a matriz de Gram
+definimos $F_l$ como sendo uma planificação da 
+saída da camada, ou seja, $F_l$ tem dimensão $N_l \times (W_l H_l)$.
+Assim, $G_l = F_lF_l^T$. Essa matriz é útil pois ela não 
+depende da resolução da imagem que entrou na rede,
+assim pode ser usada para gerar imagens em
+qualquer resolução.
+
+A geração da textura é feita através de algoritmo
+de otimização baseado em gradiente. Para isso
+comparamos as matrizes de gram da amostra e da
+imagem sendo gerada para calcular o gradiente
+com respeito a perda quadrática. Em seguida
+a imagem é atualizada para diminuir essa perda,
+forçando-a a ter as mesmas auto-correlações entre
+as features.
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=\linewidth*2/3]{files/assets/articles/gatys2.png}
+	\caption{Esquema do método de Gatys. Para a otimização
+		é utilizado o algoritmo L-BFGS, 
+		que avalia o resultado da função
+		várias vezes antes de fazer o passo,
+		e é mais eficiente em problemas de grande quantidade
+		de parâmetros.}
+	\label{img:preview}
+\end{figure}
+
+
+ 
 
 % Falar do L-BFGS 
 % (avalia o resultado da função várias vezes
@@ -225,7 +337,7 @@ e que tenha poucos parâmetros.
 
 %\section{} %MSLG+Gatys
 
-\iffalse
+\iftrue
 \chapter{Variações}
 
 O trabalho de síntese de textura
@@ -237,48 +349,132 @@ desenvolvidos até então para
 criar aplicações como ``inpainting''
 e ``renderizações não foto-realísticas''.
 
-...
+
 % Falar de aplicações diferendes de síntese de
 % textura
 
+Neste capítulo será falado de duas
+variações bem interessantes de síntese
+de textura, que nos permitem ter mais
+controle do conteúdo no resultado.
+
+
 \section{Analogias de Texturas}
 
-% Definir e mostrar resultados
-\cite{Hertzmann2001}
+O método de analogias de texturas
+foi proposto no trabalho de 
+Hertzmann, Jacobs, Oliver, Curless
+e Salesin \cite{Hertzmann2001}.
+O algoritmo consiste em fazer analogias
+de imagens, ou seja, ele
+recebia três imagens, $A$, $A'$ e $B$,
+e tentava gerar $B'$ de modo que
+$A'$ esteja para $A$ assim como
+$B'$ estará para $B$.
 
-...
 
 \begin{figure}[!ht]
 	\centering
-	\includegraphics[width=\linewidth*2/3]{files/assets/articles/heartzmann1.png}
-	\caption{...}
+	
+	\begin{tabular}{ccccccc}
+	\raisebox{-.5\height}{
+	\includegraphics[height=80pt]{files/assets/articles/hz5.png}}
+	& $:$ &
+	\raisebox{-.5\height}{
+	\includegraphics[height=80pt]{files/assets/articles/hz6.png}}
+	& $::$ &
+	\raisebox{-.5\height}{
+	\includegraphics[height=80pt]{files/assets/articles/hz7.png}}
+	& $:$ &
+	\raisebox{-.5\height}{
+	\includegraphics[height=80pt]{files/assets/articles/hz8.png}}\\
+	$A$&&$A'$&&$B$&&$B'$
+	\end{tabular}
+
+	\caption{Exemplo de analogia de imagens. As relações
+	entre $A'$ e $A$ devem ser aplicadas em $B$ para gerar $B'$.}
 	\label{img:preview}
 \end{figure}
+
+O algorítimo faz a síntese utilizando
+a representação multi-escala das imagens,
+gerando da camada mais grosseira até a camada
+mais fina. A geração é feita pixel por pixel,
+e leva em conta a sua vizinhança em $B$ e 
+vizinhança de seu correspondente em $A$.
+%CITAR IMAGEM
+
 
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=\linewidth*2/3]{files/assets/articles/heartzmann2.png}
-	\caption{...}
+	\caption{Para gerar o pixel $q$ da camada $l$, o algoritmo
+	usa a vizinhança correspondente em $B_l$, $B'_{l-1}$ e $B_{l-1}$.
+	Ele busca o melhor correspondente nas imagens $A$.}
 	\label{img:preview}
 \end{figure}
 
+\begin{figure}[!ht]
+	\centering
+	
+	\begin{tabular}{ccccccc}
+	\raisebox{-.5\height}{
+	\includegraphics[height=55pt]{files/assets/articles/hz1.png}}
+	& $:$ &
+	\raisebox{-.5\height}{
+	\includegraphics[height=55pt]{files/assets/articles/hz2.png}}
+	& $::$ &
+	\raisebox{-.5\height}{
+	\includegraphics[height=55pt]{files/assets/articles/hz3.png}}
+	& $:$ &
+	\raisebox{-.5\height}{
+	\includegraphics[height=55pt]{files/assets/articles/hz4.png}}\\
+	$A$&&$A'$&&$B$&&$B'$
+	\end{tabular}
 
+	\caption{Outro exemplo de analogia de textura. Este
+	exemplo mostra que o método também pode receber 
+	um descritor de uma imagem para gerar outra.}
+	\label{img:preview}
+\end{figure}
+
+\newpage
 \section{Transferência de estilo} 
 
 O método de ``Style Transfer'' proposto
 por Gatys, Ecker e Bethge \cite{Gatys2016}
-nos permite, alem de re-amostrar a textura,
+permite, alem de re-amostrar a textura,
 controlar a geometria do resultado.
 Para isso o algoritmo recebe duas imagens,
 uma definirá o estilo
 e outra definirá o conteúdo do resultado.
+Apesar de produzir resultados bem interessantes,
+tendo implementado o método de síntese de
+textura, a transferência de estilo
+só exige um pequeno passo a mais.
 
-...
+
+Para implementar o método, é preciso
+gerar as representações da imagem de
+conteúdo na rede convolucional.
+Então, basta adicionar
+à função de perda a diferença entre
+a representação da imagem gerada e do
+conteúdo. Assim vão existir duas perdas,
+$\mathcal{L}_{content}$ que representa
+a perda do conteúdo com as representações
+da rede, e $\mathcal{L}_{style}$, que
+representa a perda com as matrizes de Gram.
+%CITAR IMAGEM
+
+
+
 
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=\linewidth]{files/assets/articles/gatys3.png}
-	\caption{...}
+	\caption{Método da transferência de estilo. Faz a otimização
+	das matrizes de Gram e das Features ao mesmo tempo.}
 	\label{img:preview}
 \end{figure}
 

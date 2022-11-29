@@ -16,8 +16,8 @@ As principais foram: implementação
 nativa da rede VGG-19, operações
 aritméticas aceleradas na GPU,
 cálculo automático de gradiente,
-e implementação de métodos de
-otimização.
+e implementação do método de
+otimização L-BFGS.
 
 % Escolha de textura
 
@@ -32,17 +32,19 @@ do algoritmo.
 
 % Mostrar os resultados
 
-Em todos os testes a primeira imagem é
-a amostra, e as seguintes são passos (não
-necessariamente consecutivos) do
-algoritmo de otimização.
+%Em todos os testes a primeira imagem é
+%a amostra, e as seguintes são passos (não
+%necessariamente consecutivos) do
+%algoritmo de otimização.
 
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=\linewidth]{files/assets/results/result2.png}
 	\includegraphics[width=\linewidth]{files/assets/results/result5.png}
-	\caption{Teste com texturas mais caóticas. No processo,
-	a escala dos objetos se mantém, portanto o resultado
+	\caption{Teste com texturas mais caóticas. A primeira imagem
+	é a amostra, e as seguintes são sínteses a medida que
+	o número de iterações cresce.
+	No processo, a escala dos objetos se mantém, portanto o resultado
 	terá quatro vezes mais informação.}
 	\label{img:preview}
 \end{figure}
@@ -72,10 +74,10 @@ algoritmo de otimização.
 Ao gerar algumas texturas, notou-se que durante
 o processo de otimização a imagem fica preza em 
 uma estrutura específica. Com isso foi pensado
-em adicionar ruído na imagem de vez em quando
+em adicionar ruído na imagem em intervalos de iterações
 para forçar a mudança do ponto de convergência.
 Isso gerou um resultado interessante de movimentar
-a textura a cada aplicação do ruído.
+suavemente a textura a cada aplicação do ruído.
 
 \begin{figure}[!ht]
 	\centering
@@ -84,7 +86,7 @@ a textura a cada aplicação do ruído.
 		na segunda, assim como da terceira pra quarta e da quarta pra
 		quinta. 
 		Com isso, as quatro imagens geradas aparentam o processo
-	de movimento das nuvens.}
+	que aparenta movimento nas nuvens.}
 	\label{img:preview}
 \end{figure}
 
@@ -98,7 +100,7 @@ o que acontece no resultado com imagens não textura.
 	\centering
 	\includegraphics[width=\linewidth]{files/assets/results/result7.png}
 	\includegraphics[width=\linewidth]{files/assets/results/result8.png}
-	\caption{A informação espacial da imagem foi perdida,
+	\caption{Teste com imagem não textura. A informação espacial da imagem foi perdida,
 	mas cores e formas prevalecem.}
 	\label{img:preview}
 \end{figure}
@@ -112,7 +114,7 @@ o que acontece no resultado com imagens não textura.
 \chapter{Conclusão}
 
 Esse trabalho mostrou o quanto
-pode ser difícil a tarefa+ de
+pode ser difícil a tarefa de
 processamento e síntese
 de texturas e imagens no geral,
 e o quanto foi preciso andar
