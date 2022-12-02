@@ -37,7 +37,7 @@ precisamos criar representações
 que melhor explicam seu conteúdo.
 Essas representações podem ser organizadas
 hierarquicamente, onde
-a primeira identifica
+a primeira camada pode identificar estruturas como
 arestas, a segunda indica cantos, etc.
 Ao descer no nível das representações
 queremos ter uma melhor informação
@@ -146,9 +146,9 @@ bem simples e rápidas de serem calculadas
 computacionalmente. Cada camada distorce
 o espaço de entrada para torná-lo linearmente
 separável no final. Pela sua flexibilidade,
-o modelo geralmente é chamado de aproximador 
+o modelo é geralmente chamado de aproximador 
 universal de qualquer função, pois
-é capacidade de aprender funções complexas
+é capaz de aprender funções complexas
 a partir de amostras.
 
 
@@ -166,11 +166,11 @@ a partir de amostras.
 
 O Multi Layer Perceptron (MLP),
 quando aplicado diretamente
-nos pixels de uma imagem aparecem
+nos pixels de uma imagem, aparecem
 dois problemas consideráveis:
 a quantidade de parâmetros cresce muito,
 e informações espaciais da imagem
-são perdidas. Geralmente um objeto
+são perdidas. Geralmente, um objeto
 que queremos identificar pode aparecer
 em diferentes posições da imagem,
 e ao transformá-la em um vetor,
@@ -186,7 +186,7 @@ e que tenha poucos parâmetros.
 A convolução é um filtro linear 
 muito utilizado em processamento
 de imagens. Para transformar
-a imagem ele recebe uma matriz
+a imagem, ela recebe uma matriz
 chamada kernel, e faz a convolução
 somando a vizinhança de cada ponto
 com os pesos definidos pelo kernel.
@@ -214,7 +214,7 @@ por um conjunto de convoluções que
 geram representações da entrada, 
 tendo o kernel como parâmetro a ser aprendido.
 A rede empilha essas convoluções seguidas
-de aplicações de funções ReLU para tirar
+de aplicações de funções ReLUs para tirar
 a linearidade, e camadas de Pooling,
 que diminuem o tamanho da imagem
 juntando pixels vizinhos através de
@@ -241,7 +241,7 @@ por algumas camadas de Pooling e
 ligando a saída em uma rede Multi
 Layer Perceptron.
 
-Uma exemplo de arquitetura que obteve
+Um exemplo de arquitetura que obteve
 sucesso em classificação de imagens
 foi a rede VGG-19. Essa rede 
 tem camadas de convolução e ReLU,
@@ -296,7 +296,7 @@ A saída de cada camada convolucional tem dimensão
 $W_l\times H_l \times N_l$; para calcular a matriz de Gram
 definimos $F_l$ como sendo uma planificação da 
 saída da camada, ou seja, $F_l$ tem dimensão $N_l \times (W_l H_l)$.
-Assim, $G_l = F_lF_l^T$. Essa matriz é útil pois ela não 
+Assim, $G_l = F_lF_l^T$. Essa matriz é útil pois não 
 depende da resolução da imagem que entrou na rede,
 assim pode ser usada para gerar imagens em
 qualquer resolução.
@@ -305,9 +305,9 @@ A geração da textura é feita através de algoritmo
 de otimização baseado em gradiente. Para isso
 comparamos as matrizes de gram da amostra e da
 imagem sendo gerada para calcular o gradiente
-com respeito a perda quadrática. Em seguida
+com respeito a perda quadrática. Em seguida,
 a imagem é atualizada para diminuir essa perda,
-forçando-a a ter as mesmas auto-correlações entre
+forçando-a a ter as mesmas autocorrelações entre
 as features.
 
 \begin{figure}[!ht]
@@ -443,15 +443,15 @@ vizinhança de seu correspondente em $A$.
 
 O método de ``Style Transfer'' proposto
 por Gatys, Ecker e Bethge \cite{Gatys2016}
-permite, alem de re-amostrar a textura,
+permite, além de re-amostrar a textura,
 controlar a geometria do resultado.
 Para isso o algoritmo recebe duas imagens,
 uma definirá o estilo
 e outra definirá o conteúdo do resultado.
-Apesar de produzir resultados bem interessantes,
-tendo implementado o método de síntese de
-textura, a transferência de estilo
-só exige um pequeno passo a mais.
+%Apesar de produzir resultados bem interessantes,
+%tendo implementado o método de síntese de
+%textura, a transferência de estilo
+%só exige um pequeno passo a mais.
 
 
 Para implementar o método, é preciso

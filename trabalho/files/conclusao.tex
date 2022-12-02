@@ -44,7 +44,7 @@ do algoritmo.
 	\caption{Teste com texturas mais caóticas. A primeira imagem
 	é a amostra, e as seguintes são sínteses a medida que
 	o número de iterações cresce.
-	No processo, a escala dos objetos se mantém, portanto o resultado
+	No processo, a escala dos objetos se mantém, portanto, o resultado
 	terá quatro vezes mais informação.}
 	\label{img:preview}
 \end{figure}
@@ -76,14 +76,14 @@ o processo de otimização a imagem fica preza em
 uma estrutura específica. Com isso foi pensado
 em adicionar ruído na imagem em intervalos de iterações
 para forçar a mudança do ponto de convergência.
-Isso gerou um resultado interessante de movimentar
+Isso gerou um resultado interessante ao movimentar
 suavemente a textura a cada aplicação do ruído.
 
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=\linewidth]{files/assets/results/result6.png}
 	\caption{A terceira imagem foi gerada a partir da adição de ruído
-		na segunda, assim como da terceira pra quarta e da quarta pra
+		na segunda, assim como da terceira para quarta e da quarta para
 		quinta. 
 		Com isso, as quatro imagens geradas aparentam o processo
 	que aparenta movimento nas nuvens.}
@@ -92,6 +92,7 @@ suavemente a textura a cada aplicação do ruído.
 
 % Teste com imagens não textura
 
+\newpage
 Não é preciso se limitar a texturas com
 esse tipo de implementação. É possível verificar
 o que acontece no resultado com imagens não textura.
@@ -105,11 +106,34 @@ o que acontece no resultado com imagens não textura.
 	\label{img:preview}
 \end{figure}
 
+\newpage
 % Style transfer
+Uma vez implementada a síntese de textura, implementar
+a transferência de estilo passa a ser trivial,
+apenas tendo que adicionar a diferença das features
+na função de perda.
 
-% Não fica restrito a textura
 
-% Multiescala?
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=\linewidth]{files/assets/results/air1.png}
+	\includegraphics[width=\linewidth]{files/assets/results/galinha1.png}
+	\caption{Resultado de transferência de estilo, a primeira imagem
+	é usada como estilo e a segunda como conteúdo. O resultado
+	depende da escala das duas imagens.}
+	\label{img:preview}
+\end{figure}
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=\linewidth]{files/assets/results/magali.png}
+	\includegraphics[width=\linewidth]{files/assets/results/galinha2.png}
+	\caption{Mais resultados de transferência de estilo. Na última é
+	possível ver que o método não fica restrito a texturas.}
+	\label{img:preview}
+\end{figure}
+
+
+
 
 \chapter{Conclusão}
 
@@ -161,7 +185,7 @@ que melhora bastante a velocidade
 de operações aritméticas.
 Essas ferramentas também 
 contam com sistemas de cálculo automático
-de gradiente, o que torna o trabalho
+de gradiente, tornando o trabalho
 de otimização mais fácil e
 menos suscetível a erros.
 

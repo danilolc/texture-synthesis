@@ -3,6 +3,7 @@
 
 # In[0]: Load everything
 import torch
+import scipy.ndimage as nd
 from torch import optim, nn
 from torchvision import models, transforms, utils
 from tqdm import tqdm
@@ -16,12 +17,15 @@ vgg19 = models.vgg19(weights = "DEFAULT").to("cuda")
 #vgg19 = models.vgg19().to("cuda")
 
 for i in range(len(vgg19.features)):
-    if type(vgg19.features[i]) is nn.modules.conv.Conv2d:
-        vgg19.features[i].paddin_gmode = 'reflect'
+    #if type(vgg19.features[i]) is nn.modules.conv.Conv2d:
+    #    vgg19.features[i].paddin_gmode = 'reflect'
         #vgg19.features[i].padding=(0,0)
 
     if type(vgg19.features[i]) is nn.modules.pooling.MaxPool2d:
         vgg19.features[i] = nn.AvgPool2d(2)
+        
+    #if type(vgg19.features[i]) is torch.nn.modules.activation.ReLU:
+    #    vgg19.features[i] = nn.LeakyReLU(0.001, inplace=True)
 
 C1 = vgg19.features[0:4]
 C2 = vgg19.features[4:9]
@@ -33,7 +37,7 @@ del vgg19
 
 #######################
 
-normalize = True
+normalize = False
 
 mean = [0.485, 0.456, 0.406]
 std  = [0.229, 0.224, 0.225]
@@ -79,8 +83,9 @@ def gram(k):
 
 # In[1]: Lê imagem e plota
 
-#im = Image.open("textures/sky6.jpg").convert('RGB')
-im = Image.open("tests/electric2.jpg").convert('RGB')
+im = Image.open("textures/sky6.jpg").convert('RGB')
+im = nd.zoom(im, (1/2,1/2,1))
+#im = Image.open("tests/electric2.jpg").convert('RGB')
 im = preprocess(im).to("cuda")
 
 #plt.imshow(deprocess(im))
@@ -104,6 +109,8 @@ del im, c1, c2, c3, c4, c5
 # In[]: Lê conteúdo e plota 
 
 im = Image.open("textures/style/eu.jpg").convert('RGB')
+im = nd.zoom(im, (2,2,1))
+
 im = preprocess(im).to("cuda")
 
 plt.imshow(im.cpu().detach().permute(1, 2, 0))
@@ -114,8 +121,6 @@ k2 = C2(k1).detach()
 k3 = C3(k2).detach()
 k4 = C4(k3).detach()
 k5 = C5(k4).detach()
- 
-del im
 
 # In[]:
 
@@ -135,7 +140,7 @@ del im
 #image = Variable(Tensor(image), requires_grad=True)
 #image = image.requires_grad_()
 
-image = torch.rand(3, 256, 256, requires_grad=True, device="cuda")
+image = torch.rand(im.size(), requires_grad=True, device="cuda")
 
 loss_func = nn.MSELoss()
 optimizer = optim.LBFGS([image], lr=1e-0, history_size=50)
@@ -169,11 +174,11 @@ def closure():
 
 
     ######################## 4
-    #_c4 = C4(_c3)
-    #content_loss = loss_func(_c4, k4) + content_loss
+    _c4 = C4(_c3)
+    content_loss = loss_func(_c4, k4) + content_loss
     
-    #_g4 = gram(_c4)
-    #style_loss = loss_func(_g4, g4) + style_loss
+    _g4 = gram(_c4)
+    style_loss = loss_func(_g4, g4) + style_loss
 
 
     ######################## 5

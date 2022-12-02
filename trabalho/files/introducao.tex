@@ -56,7 +56,7 @@ estudando e imitando o processo que gerou esse padrão.
 Cross, G.R. e Jain, A.K. \cite{Cross1983} descrevem
 textura como sendo um Campo Markiviano Aleatório
 (Markov Random Field, MRF). Esse modelo é o mais
-usado no processo de síntese pois satisfaz a propriedade
+usado no processo de síntese, pois satisfaz a propriedade
 de Markov (o valor de cada pixel dado sua vizinhança não
 depende do resto da textura) e a homogeneidade (a
 distribuição é invariante por translação), logo
@@ -104,7 +104,7 @@ para essa métrica perceptual.
 	\centering
 	\includegraphics[width=\linewidth*2/3]{files/assets/sinth.png}
 	\caption{Exemplo de síntese de textura. A imagem
-	maior é visualmente semelhante a imagem menor.}
+	maior é visualmente semelhante à imagem menor.}
 	\label{img:preview}
 \end{figure}
 
@@ -127,7 +127,7 @@ Com o crescimento da área de processamento
 de imagens e do poder computacional,
 os modelos de Síntese de Textura foram
 se aprimorando ao longo do tempo.
-As melhorias são tando de qualidade
+As melhorias são tanto de qualidade
 do resultado quanto no tempo de 
 execução do método. Neste capítulo
 será apresentado um breve resumo de
@@ -339,7 +339,7 @@ vizinhanças mais próximas na amostra.
 \section{Modelos de aprendizado profundo}
 
 Os modelos de aprendizado profundo se aproveitam
-dos avanços recentes que a área de Aprendizagem
+dos avanços recentes na área de Aprendizagem
 de Máquina para melhorar o processo de síntese.
 Os métodos a seguir utilizam as representações
 geradas por redes treinadas para a detecção
@@ -360,7 +360,7 @@ da textura semelhante ao que foi proposto
 por Portilla e Simoncelli, porém, em
 vez de utilizar transformações da amostra
 escolhidas a mão, utilizam a saída da
-rede convolucional pré treinada. 
+rede convolucional pré-treinada. 
 Esse método será tratado com detalhes
 nesse trabalho, seguindo de uma implementação.
 
@@ -369,7 +369,7 @@ nesse trabalho, seguindo de uma implementação.
 	\includegraphics[width=\linewidth*2/3]{files/assets/articles/gatys1.png}
 	\caption{Modelo de Gatys, Ecker e Bethge que
 	utiliza as matrizes de Gram das convoluções.
-	O método permite não fica muito preso na amostra
+	O método não fica muito preso na amostra
 	e produz resultados mais criativos.}
 	\label{img:preview}
 \end{figure}
