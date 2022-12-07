@@ -22,5 +22,5 @@ def load_image(pth, scale=1):
     return preprocess(im).to("cuda")
     
 def plot_image(tensor):
-    plt.imshow(deprocess(tensor))
+    plt.imshow(deprocess(tensor).clamp(0,1))
     plt.show()

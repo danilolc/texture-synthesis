@@ -9,10 +9,11 @@ from image import load_image, plot_image
 from gram import gram, gram_vec
 from model import convs, convs_vec
 
+
 #### Load source image
 
 
-src = load_image("textures/sky6.jpg")
+src = load_image("textures/128/onca.jpg")
 gsrc = gram_vec(src)
 
 plot_image(src)
@@ -26,6 +27,7 @@ has_content = False
 if has_content:
     con = load_image("textures/style/eu.jpg")
     ccon = convs_vec(con)
+    
     plot_image(con)
 
 
@@ -52,7 +54,6 @@ def closure():
     
     loss = torch.tensor(0, device='cuda')
     cdst = dst
-    gdst = []
     
     for i, C in enumerate(convs):
         cdst = C(cdst)
