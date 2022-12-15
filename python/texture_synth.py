@@ -12,7 +12,7 @@ from torchvision.utils import save_image
 
 #### Load source image
 
-
+# Image used as sample or as style
 src = load_image("textures/128/sky.png").to(device)
 gsrc = gram_vec(src)
 
@@ -21,10 +21,11 @@ plot_image(src)
 
 #### Load content image
 
-
+# Turn on if you want to do Style Transfer
 has_content = False
 
 if has_content:
+    # Content image from Style Transfer
     con = load_image("textures/new/van-gogh.jpg").to(device)
     ccon = convs_vec(con)
     
@@ -33,7 +34,7 @@ if has_content:
 
 ##### Create random noise, loss function and optimizer
 
-
+# Size of the output from Texture Synthesis
 dst_size = (3, 256, 256)
 
 if has_content:
@@ -48,7 +49,7 @@ optimizer = optim.LBFGS([dst], history_size=50)
 ##### Closure function that calculate the loss
 
 
-# Features weights
+# Features weights on each layer of the network
 wcontent = [0, 0, 3, 3, 3]
 wstyle = [1, 1, 3, 1, 1]
 
@@ -76,7 +77,8 @@ def closure():
 
 ##### Run optimization
 
-
+# Turn on if you want to add normal noise to the image each 25 iterations
+# It will save the result image before adding the noise
 add_noise = False
 
 for i in pbar:
@@ -90,5 +92,4 @@ for i in pbar:
 
     optimizer.step(closure)
     plot_image(dst)
-    print("A")
 
