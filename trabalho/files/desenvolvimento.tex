@@ -1,4 +1,4 @@
-\chapter{Deep Leaning}
+\chapter{Aprendizado Profundo}
 
 % Fazer um resumo
 
@@ -11,7 +11,7 @@ vinha pela grande variação de forma
 e posição dos números, tornando 
 os modelos muito complexos e pouco
 precisos. O desenvolvimento
-recente na área de Machine Learning
+recente na área de \textit{Machine Learning}
 permitiu a criação de modelos
 simples capazes de aprender com
 os dados e fazer generalizações
@@ -67,7 +67,7 @@ o que tornaria mais rápido a criação de aplicações.
 
 
 Redes Neurais são um tipo 
-de modelo de Machine Learning inspirado
+de modelo de \textit{Machine Learning} inspirado
 em redes de neurônios naturais e como
 eles se comunicam. Elas podem ser
 representadas por um grafo, onde
@@ -76,22 +76,24 @@ representa uma dependência. Essas
 redes podem ter vários formatos
 dependendo do tipo de aplicação.
 
-Um exemplo comum de Rede Neural é o Multi Layer
-Perceptron. Nesse modelo, a rede é dividida
+Um exemplo comum de Rede Neural é o \textit{Multi Layer
+	Perceptron}, ou MLP \cite{Zhang2015}. Nesse modelo, a rede é dividida
 em camadas de diferentes tamanhos, e o dado
 flui da camada de entrada até a saída,
 que pode representar uma classificação
-da entrada ou uma função geral.
+da entrada ou uma função geral (Figura \ref{mlp}).
 
 % Imagem MLP
 
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=\linewidth*2/3]{files/assets/deeplearning/mlp.png}
-	\caption{Rede Multi Layer Perceptron. Cada camada da
+	\caption{Rede MLP. Cada camada da
 	rede atua como uma representação do dado de entrada, que
-	é usada para calcular a próxima camada.}
-	\label{img:preview}
+	é usada para calcular a próxima camada.
+	(\url{https://commons.wikimedia.org/wiki/File:MultiLayerPerceptron.svg}
+	. Acesso: 15/12/2022.)}
+	\label{mlp}
 \end{figure}
 
 
@@ -130,7 +132,7 @@ uma função de erro na saída. Essa minimização
 em relação à função de perda. Como a derivada
 de todas as funções aplicadas é conhecida,
 o gradiente pode ser calculado computacionalmente
-utilizando ``backpropagation''.
+utilizando \textit{backpropagation}.
 
 %A ideia é ter um modelo
 %simples porém bem flexível
@@ -164,9 +166,10 @@ a partir de amostras.
 % Reduz a quantidade de parâmetros
 % Invariante por translação
 
-O Multi Layer Perceptron (MLP),
-quando aplicado diretamente
-nos pixels de uma imagem, aparecem
+A rede MLP,
+quando aplicada diretamente
+aos pixels de uma imagem
+concatenando-os linha por linha, aparecem
 dois problemas consideráveis:
 a quantidade de parâmetros cresce muito,
 e informações espaciais da imagem
@@ -187,9 +190,9 @@ A convolução é um filtro linear
 muito utilizado em processamento
 de imagens. Para transformar
 a imagem, ela recebe uma matriz
-chamada kernel, e faz a convolução
+chamada \textit{kernel}, e faz a convolução
 somando a vizinhança de cada ponto
-com os pesos definidos pelo kernel.
+com os pesos definidos pelo \textit{kernel}.
 Dependendo da matriz escolhida,
 vários filtros podem ser gerados,
 como detector de arestas, suavizador,
@@ -199,10 +202,12 @@ etc.
 	\centering
 	\includegraphics[height=200pt]{files/assets/deeplearning/conv.png}
 	\caption{Exemplo de como a convolução opera em uma imagem.
-	Em azul a origem e em verde o destino. O kernel nesse caso
-	é uma matriz $3\times 3$. A imagem precisa ser extrapolada
-	para as vizinhanças das bordas, geralmente é preenchida
-	com 0.}
+	Em azul a origem e em verde o destino. O \textit{kernel} nesse caso
+	é uma matriz $3\times 3$. Para manter a resolução da imagem,
+	ela precisa ser extrapolada nas vizinhanças das bordas; 
+	dependendo da aplicação ela pode ser preenchida
+	com 0s ou com o valor na borda. (Fonte:
+	\url{https://commons.wikimedia.org/wiki/File:Convolution_arithmetic_-_Padding_strides.gif}. Acesso: 15/12/2022, adaptado.)}
 	\label{img:preview}
 \end{figure}
 
@@ -212,10 +217,10 @@ etc.
 Uma rede neural convolucional é formada
 por um conjunto de convoluções que
 geram representações da entrada, 
-tendo o kernel como parâmetro a ser aprendido.
+tendo o \textit{kernel} como parâmetro a ser aprendido.
 A rede empilha essas convoluções seguidas
 de aplicações de funções ReLUs para tirar
-a linearidade, e camadas de Pooling,
+a linearidade, e camadas de \textit{pooling},
 que diminuem o tamanho da imagem
 juntando pixels vizinhos através de
 operações como a média ou o máximo.
@@ -227,7 +232,7 @@ onde a última representa os três
 canais de cores.
 As convoluções operam nos canais
 de cores e podem gerar novos canais,
-geralmente chamados de ``features'',
+geralmente chamados de \textit{features},
 cada uma representando alguma informação
 da imagem.
 % !!! Falar do aumento de features
@@ -237,16 +242,15 @@ da imagem.
 Esse tipo de rede gerou uma revolução
 no ramo de classificação de imagens.
 A classificação era feita passando
-por algumas camadas de Pooling e
-ligando a saída em uma rede Multi
-Layer Perceptron.
+por algumas camadas de \textit{pooling} e
+ligando a saída em uma rede MLP.
 
 Um exemplo de arquitetura que obteve
 sucesso em classificação de imagens
-foi a rede VGG-19. Essa rede 
+foi a rede VGG-19 \cite{Simonyan2014}. Essa rede 
 tem camadas de convolução e ReLU,
-e a cada pooling dobra o número
-de features, indicando que quanto
+e a cada \textit{pooling} dobra o número
+de \textit{features}, indicando que quanto
 mais abaixo a informação está na rede,
 mais representações ela pode ter.
 
@@ -255,9 +259,11 @@ mais representações ela pode ter.
 	\includegraphics[width=\linewidth*5/6]{files/assets/deeplearning/vgg19.png}
 	\caption{Arquitetura da rede VGG-19. Cada bloco cinza representa
 	uma convolução e um ReLU, os blocos vermelhos representam 
-	Pooling, os blocos azuis são camadas da rede MLP e em verde é a
+	\textit{pooling}, os blocos azuis são camadas da rede MLP e em verde é a
 	saída da classificação (ela é treinada para diferenciar $1000$
-	classes).}
+	classes).
+	(\url{https://en.wikipedia.org/wiki/File:VGG_neural_network.png}
+	. Acesso: 15/12/2022.)}
 	\label{img:preview}
 \end{figure}
 
@@ -289,26 +295,37 @@ utilizando essas redes, a equipe de Gatys percebeu que
 mantendo as relações entre as camadas,
 a textura pode ser randomizada sem que 
 a informação perceptual da imagem se perca.
-Para isso eles utilizaram a matriz de Gram gerada por cada
+Para isso, eles utilizaram a matriz de Gram gerada por cada
 uma dessas camadas. A matriz tem tamanho $N_l \times N_l$,
-onde $N_l$ é o número de features da camada $l$ da rede.
+onde $N_l$ é o número de \textit{features} da camada $l$ da rede.
 A saída de cada camada convolucional tem dimensão
 $W_l\times H_l \times N_l$; para calcular a matriz de Gram
-definimos $F_l$ como sendo uma planificação da 
-saída da camada, ou seja, $F_l$ tem dimensão $N_l \times (W_l H_l)$.
+definimos $F_l$ como sendo uma planificação linha a linha da 
+saída da camada, ou seja, $F_l$ tem dimensão $N_l \times (W_l H_l)$
+(Figura \ref{gram}). 
 Assim, $G_l = F_lF_l^T$. Essa matriz é útil pois não 
 depende da resolução da imagem que entrou na rede,
 assim pode ser usada para gerar imagens em
 qualquer resolução.
 
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=\linewidth*2/3]{files/assets/deeplearning/gram.jpg}
+	\caption{Esquema da matriz de Gram. Ela representa a correlação
+		entre as \textit{features} das camadas convolucionais. (Fonte:
+		\url{https://www.researchgate.net/figure/The-Gram-Matrix-is-created-from-a-target-image-and-a-reference-image_fig4_356667127}
+		. Acessado: 15/12/2022.)}
+	\label{gram}
+\end{figure}
+
 A geração da textura é feita através de algoritmo
 de otimização baseado em gradiente. Para isso
-comparamos as matrizes de gram da amostra e da
+comparamos as matrizes de Gram da amostra e da
 imagem sendo gerada para calcular o gradiente
 com respeito a perda quadrática. Em seguida,
 a imagem é atualizada para diminuir essa perda,
 forçando-a a ter as mesmas autocorrelações entre
-as features.
+as \textit{features}.
 
 \begin{figure}[!ht]
 	\centering
@@ -318,7 +335,7 @@ as features.
 		que avalia o resultado da função
 		várias vezes antes de fazer o passo,
 		e é mais eficiente em problemas de grande quantidade
-		de parâmetros.}
+		de parâmetros. Fonte: \cite{Gatys2015}.}
 	\label{img:preview}
 \end{figure}
 
@@ -338,7 +355,7 @@ as features.
 %\section{} %MSLG+Gatys
 
 \iftrue
-\chapter{Variações}
+\chapter{Outras aplicações}
 
 O trabalho de síntese de textura
 não fica limitado apenas a re-amostrar
@@ -346,8 +363,8 @@ a imagem de entrada. Ao longo
 dos anos foram aparecendo trabalhos
 que aproveitavam os algoritmos
 desenvolvidos até então para
-criar aplicações como ``inpainting''
-e ``renderizações não foto-realísticas''.
+criar aplicações como \textit{inpainting}
+e renderizações não foto-realísticas.
 
 
 % Falar de aplicações diferendes de síntese de
@@ -392,7 +409,8 @@ $B'$ estará para $B$.
 	\end{tabular}
 
 	\caption{Exemplo de analogia de imagens. As relações
-	entre $A'$ e $A$ devem ser aplicadas em $B$ para gerar $B'$.}
+	entre $A'$ e $A$ devem ser aplicadas em $B$ para gerar $B'$.
+	Fonte: \cite{Hertzmann2001}.}
 	\label{img:preview}
 \end{figure}
 
@@ -401,8 +419,8 @@ a representação multi-escala das imagens,
 gerando da camada mais grosseira até a camada
 mais fina. A geração é feita pixel por pixel,
 e leva em conta a sua vizinhança em $B$ e 
-vizinhança de seu correspondente em $A$.
-%CITAR IMAGEM
+vizinhança de seu correspondente em $A$, como
+mostra a Figura \ref{hertz}.
 
 
 \begin{figure}[!ht]
@@ -410,8 +428,9 @@ vizinhança de seu correspondente em $A$.
 	\includegraphics[width=\linewidth*2/3]{files/assets/articles/heartzmann2.png}
 	\caption{Para gerar o pixel $q$ da camada $l$, o algoritmo
 	usa a vizinhança correspondente em $B_l$, $B'_{l-1}$ e $B_{l-1}$.
-	Ele busca o melhor correspondente nas imagens $A$.}
-	\label{img:preview}
+	Ele busca o melhor correspondente nas imagens $A$.
+	Fonte: \cite{Hertzmann2001}.}
+	\label{hertz}
 \end{figure}
 
 \begin{figure}[!ht]
@@ -434,14 +453,15 @@ vizinhança de seu correspondente em $A$.
 
 	\caption{Outro exemplo de analogia de textura. Este
 	exemplo mostra que o método também pode receber 
-	um descritor de uma imagem para gerar outra.}
+	um descritor de uma imagem para gerar outra.
+	Fonte: \cite{Hertzmann2001}.}
 	\label{img:preview}
 \end{figure}
 
 \newpage
 \section{Transferência de estilo} 
 
-O método de ``Style Transfer'' proposto
+O método de \textit{Style Transfer} proposto
 por Gatys, Ecker e Bethge \cite{Gatys2016}
 permite, além de re-amostrar a textura,
 controlar a geometria do resultado.
@@ -474,7 +494,8 @@ representa a perda com as matrizes de Gram.
 	\centering
 	\includegraphics[width=\linewidth]{files/assets/articles/gatys3.png}
 	\caption{Método da transferência de estilo. Faz a otimização
-	das matrizes de Gram e das Features ao mesmo tempo.}
+	das matrizes de Gram e das \textit{features} ao mesmo tempo.
+	Fonte: \cite{Gatys2016}}
 	\label{img:preview}
 \end{figure}
 

@@ -6,7 +6,7 @@ import torch
 from model import convs
 
 
-#### Calculate the Gram Matrix from features k
+#### Calculate the Gram Matrix from features tensor k
 
 
 def gram(k):

@@ -18,6 +18,13 @@ aritméticas aceleradas na GPU,
 cálculo automático de gradiente,
 e implementação do método de
 otimização L-BFGS.
+O código utilizado, bem como
+as texturas, estão disponíveis
+em \url{https://github.com/danilolc/texture-synthesis}.
+O arquivo principal é o \textit{texture\_synth.py},
+que pode ser modificado para
+executar as diferentes implementações
+do trabalho.
 
 % Escolha de textura
 
@@ -57,7 +64,7 @@ do algoritmo.
 	\caption{O método não funciona bem em textura com 
 	estrutura regular global, ele dá preferência por
 	estruturas locais. }
-	\label{img:preview}
+	\label{img:presente}
 \end{figure}
 
 
@@ -67,17 +74,22 @@ do algoritmo.
 	\includegraphics[width=\linewidth]{files/assets/results/result4.png}
 	\caption{Nuvens apresentam uma estrutura caótica
 	ideal para esse método.}
-	\label{img:preview}
+	\label{nuuv}
 \end{figure}
 % Falar da animação
 
-Ao gerar algumas texturas, notou-se que durante
-o processo de otimização a imagem fica preza em 
-uma estrutura específica. Com isso foi pensado
-em adicionar ruído na imagem em intervalos de iterações
+\newpage
+As iterações foram feitas até que não fosse possível perceber
+diferenças na imagem entre os passos de iteração.
+Todos os testes feitos convergiram para algum valor, que
+nem sempre mostrava a textura de forma ideal (como pode
+ser visto na Figura \ref{img:presente}).
+Com isso foi pensado
+em adicionar ruído na imagem em intervalos fixos de iterações
 para forçar a mudança do ponto de convergência.
 Isso gerou um resultado interessante ao movimentar
-suavemente a textura a cada aplicação do ruído.
+suavemente a textura a cada aplicação do ruído,
+como mostra a Figura \ref{img:nuvem}.
 
 \begin{figure}[!ht]
 	\centering
@@ -85,9 +97,9 @@ suavemente a textura a cada aplicação do ruído.
 	\caption{A terceira imagem foi gerada a partir da adição de ruído
 		na segunda, assim como da terceira para quarta e da quarta para
 		quinta. 
-		Com isso, as quatro imagens geradas aparentam o processo
-	que aparenta movimento nas nuvens.}
-	\label{img:preview}
+		Com isso, a sequência de imagens se comporta de um modo
+		semelhante ao movimento de nuvens.}
+	\label{img:nuvem}
 \end{figure}
 
 % Teste com imagens não textura
@@ -95,23 +107,62 @@ suavemente a textura a cada aplicação do ruído.
 \newpage
 Não é preciso se limitar a texturas com
 esse tipo de implementação. É possível verificar
-o que acontece no resultado com imagens não textura.
+o que acontece no resultado com imagens não textura, 
+como feito na Figura \ref{nontex}.
+O resultado do método nessas imagens preserva
+cores e pequenos objetos, mas não reproduzem
+a informação espacial da imagem.
 
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=\linewidth]{files/assets/results/result7.png}
 	\includegraphics[width=\linewidth]{files/assets/results/result8.png}
-	\caption{Teste com imagem não textura. A informação espacial da imagem foi perdida,
-	mas cores e formas prevalecem.}
-	\label{img:preview}
+	\caption{Teste de Síntese de Textura com imagem não textura.}
+	\label{nontex}
 \end{figure}
 
-\newpage
+Todos os testes foram executados em um notebook
+Dell G3 3590, com um processador Intel Core i5-9300H
+em 2,4GHz e uma placa de vídeo (GPU) NVIDIA GeForce GTX 1050
+de 3 GB de memória.
+Importar o modelo VGG-19 (depois de baixado) 
+e calcular as matrizes de Gram
+da amostra é feito quase instantaneamente.
+É possível escolher entre rodar o modelo no processador
+(CPU) ou na placa de vídeo (CUDA). No segundo
+o método converge em poucos segundos,
+como mostra a Tabela \ref{tabela}.
+
+
+\begin{table}[ht]
+	\centering
+	\caption{Tempo de execução para gerar a imagem da Figura \ref{nuuv}
+	(uma imagem de resolução 256x256).
+	O resultado convergiu a partir de 18 iterações do L-BFGS.}
+	\label{tabela}
+	\begin{centering}
+		\begin{tabularx}{\textwidth*2/3}{||X|c|c||}
+			\hline Dispositivo & Tempo total & Tempo por iteração \\
+			\hline CPU & 267s & 14,8s/it \\
+			\hline CUDA & 40s & 2,2s/it \\
+			\hline
+		\end{tabularx}
+	\end{centering}
+\end{table}
+
+Não exite uma forma fechada de comparar a qualidade
+do resultado, assim a melhor maneira de verificar
+se o método funciona bem para a textura dada
+é comparando os resultados visualmente e julgando-os
+com base na percepção.
+
 % Style transfer
 Uma vez implementada a síntese de textura, implementar
 a transferência de estilo passa a ser trivial,
-apenas tendo que adicionar a diferença das features
-na função de perda.
+apenas tendo que adicionar a diferença das \textit{features}
+na função de perda. Os resultados deste método são mostrados nas
+figuras a seguir.
+
 
 
 \begin{figure}[!ht]
@@ -150,13 +201,14 @@ na área, cada um tentando
 encontrar uma maneira nova de
 melhorar a solução do problema.
 
-Redes Neurais e Deep Learning
+Redes Neurais e \textit{Deep Learning}
 vêm se mostrando ferramentas
 bem poderosas para o trabalho com imagem.
+A diferença entre as camadas de
 Redes Convolucionais pré-treinadas
 para a detecção de objetos
-oferecem uma excelente métrica
-perceptual, abrindo caminho para
+podem oferecer uma excelente
+métrica perceptual, abrindo caminho para
 diversos novos trabalhos.
 O aprendizado automático
 de representações facilita
@@ -174,7 +226,7 @@ um problema.
 % não são apenas para classificação
 
 Ferramentas para trabalhar
-com Machine Learning como o
+com \textit{Machine Learning} como o
 PyTorch vêm se mostrando
 mais poderosas
 a cada dia, oferecendo

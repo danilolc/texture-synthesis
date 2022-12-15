@@ -4,8 +4,10 @@
 from torch import nn
 from torchvision import models
 
-vgg19 = models.vgg19(weights = "DEFAULT").to("cuda")
+device = "cuda"
+#device = "cpu"
 
+vgg19 = models.vgg19(weights = "DEFAULT").to(device)
 
 #### Adapt VGG19 to texture synthesis
 
@@ -31,6 +33,7 @@ C5 = vgg19.features[27:36]
 """
 
 #"""
+
 C1 = vgg19.features[0:2]
 C2 = vgg19.features[2:5]
 C3 = vgg19.features[5:10]
