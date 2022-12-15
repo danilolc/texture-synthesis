@@ -1,6 +1,6 @@
 # Síntese de Textura e Transferência de Estilo
 
-![test](trabalho/files/assets/results/magali2.jpg?raw=true)
+![test](latex/files/assets/results/magali2.jpg?raw=true)
 
 Trabalho de conclusão do curso de graduação em Matemática Aplicada pela Escola
 de Matemática Aplicada da FGV (FGV/EMAp).
