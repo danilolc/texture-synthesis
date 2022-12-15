@@ -1,6 +1,6 @@
 # Texture Synthesis and Style Transfer
 
-![test](trabalho/files/assets/results/magali2.jpg?raw=true)
+![test](latex/files/assets/results/magali2.jpg?raw=true)
 
 Undergraduate project of the Applied Mathematics course by the School of Applied Mathematics of FGV (FGV/EMAp).
 
